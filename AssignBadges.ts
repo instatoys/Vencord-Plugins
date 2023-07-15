@@ -25,91 +25,91 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         description: "Discord Staff badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     discordPartner: {
         type: OptionType.BOOLEAN,
         description: "Discord Partner badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     moderatorProgrammesAlumni: {
         type: OptionType.BOOLEAN,
         description: "Moderator Programmes Alumni badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     hypesquadEvents: {
         type: OptionType.BOOLEAN,
         description: "HypeSquad Events badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     hypesquadHouseBravery: {
         type: OptionType.BOOLEAN,
         description: "HypeSquad Bravery badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     hypesquadHouseBrilliance: {
         type: OptionType.BOOLEAN,
         description: "HypeSquad Brilliance badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     hypesquadHouseBalance: {
         type: OptionType.BOOLEAN,
         description: "HypeSquad Balance badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     bugHunterLevel1: {
         type: OptionType.BOOLEAN,
         description: "Discord Bug Hunter badge (Level 1) displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     bugHunterLevel2: {
         type: OptionType.BOOLEAN,
         description: "Discord Bug Hunter badge (Level 2) displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     activeDeveloper: {
         type: OptionType.BOOLEAN,
         description: "Active Developer badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     verifiedDeveloper: {
         type: OptionType.BOOLEAN,
         description: "Verified Developer badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     earlySupporter: {
         type: OptionType.BOOLEAN,
         description: "Early Supporter badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     nitroBadge: {
         type: OptionType.BOOLEAN,
         description: "Nitro badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     // nitroBadgeDate: {
@@ -122,7 +122,7 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         description: "Nitro Premium badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     // nitroBoosterDate: {
@@ -135,7 +135,7 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         description: "Known As badge displayed on your profile",
         default: false,
-        restartNeeded: true
+        restartNeeded: false
     },
 
     // knownAsName: {
@@ -205,4 +205,13 @@ export default definePlugin({
 
         console.log('[AssignBadges] All specified badges added to profile!');
     },
+
+    stop: () => {
+        const store = Vencord.Webpack.findStore("UserProfileStore");
+        const original = store.getUserProfile;
+
+        store.getUserProfile = original;
+
+        console.log('[AssignBadges] All specified badges removed from profile!');
+    }
 });
